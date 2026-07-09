@@ -10,8 +10,12 @@
 <div class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>User Management</h2>
-        <!-- th:href builds a link to /users/new -->
-        <a th:href="@{/users/new}" class="btn btn-primary">+ Add User</a>
+        <div>
+            <!-- ${session.loggedInUser} reads directly from the HttpSession we set at login -->
+            <span class="text-muted me-2">Logged in as <strong th:text="${session.loggedInUser}"></strong></span>
+            <a th:href="@{/users/new}" class="btn btn-primary">+ Add User</a>
+            <a th:href="@{/logout}" class="btn btn-outline-secondary">Logout</a>
+        </div>
     </div>
 
     <table class="table table-bordered table-hover bg-white">

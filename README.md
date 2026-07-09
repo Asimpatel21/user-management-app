@@ -5,7 +5,7 @@ A simple CRUD web app: Create, Read, Update, Delete users, backed by SQL Server.
 ## 1. Set up the database (SSMS)
 1. Open SSMS, connect to your SQL Server instance.
 2. Open `sql/setup.sql` and execute it (F5). This creates the `UserManagementDB`
-   database and a `users` table, with 2 sample rows.
+   database, a `users` table (with 2 sample rows), and an `accounts` table (for login/signup).
 
 ## 2. Configure the app
 Open `src/main/resources/application.properties` and update:
@@ -29,10 +29,15 @@ mvn spring-boot:run
 Then open: **http://localhost:8080**
 
 ## 4. What you can do
-- View all users (`/users`)
+- **Sign up** for an account (`/signup`)
+- **Log in** (`/login`)
+- View all users (`/users`) -- only visible once logged in
 - Add a new user (`/users/new`)
 - Edit a user (`/users/edit/{id}`)
 - Delete a user (`/users/delete/{id}`)
+- **Log out** (`/logout`)
+
+Note: "accounts" (login credentials) are separate from "users" (the people being managed in the CRUD screens) -- two different tables, two different purposes.
 
 ## Project structure
 ```

@@ -54,6 +54,18 @@
             <scope>runtime</scope>
         </dependency>
 
+      <!--
+     Gives us BCryptPasswordEncoder, used to HASH passwords before saving them.
+     We NEVER store a user's actual typed password in the database, only a scrambled
+     (one-way) version of it. This is the crypto piece of Spring Security, without
+     pulling in full Spring Security's login-page/session machinery; we're writing
+     our own simple login flow below so it's easier to follow.
+   -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+
         <!-- Auto-restarts the app when you change code, handy during development -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

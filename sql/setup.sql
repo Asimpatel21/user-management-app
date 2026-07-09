@@ -35,3 +35,24 @@ GO
 
 -- 4. Verify
 SELECT * FROM users;
+GO
+
+-- ============================================
+-- 5. LOGIN / SIGNUP TABLE
+-- This is a SEPARATE table from "users" above.
+-- "users" = the people being managed by the app (the CRUD data).
+-- "accounts" = the login credentials of whoever is USING the app.
+-- ============================================
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'accounts')
+BEGIN
+    CREATE TABLE accounts (
+        id            BIGINT IDENTITY(1,1) PRIMARY KEY,
+        username      NVARCHAR(50)  NOT NULL UNIQUE,
+        email         NVARCHAR(150) NOT NULL UNIQUE,
+        password      NVARCHAR(255) NOT NULL,   -- stores a HASHED password, never plain text
+        created_at    DATETIME2 DEFAULT GETDATE()
+    );
+END
+GO
+
+SELECT * FROM accounts;
