@@ -31,6 +31,14 @@
             <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger small"></span>
         </div>
 
+        <div class="mb-3">
+            <label class="form-label">Role</label>
+            <select th:field="*{role}" class="form-select">
+                <option value="USER">User (view/manage users)</option>
+                <option value="ADMIN">Admin (also can bulk-upload users)</option>
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-success w-100">Sign Up</button>
     </form>
 

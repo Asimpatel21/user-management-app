@@ -29,15 +29,28 @@ mvn spring-boot:run
 Then open: **http://localhost:8080**
 
 ## 4. What you can do
-- **Sign up** for an account (`/signup`)
+- **Sign up** for an account, choosing a role: **User** or **Admin** (`/signup`)
 - **Log in** (`/login`)
 - View all users (`/users`) -- only visible once logged in
 - Add a new user (`/users/new`)
 - Edit a user (`/users/edit/{id}`)
 - Delete a user (`/users/delete/{id}`)
+- **Admins only:** Bulk-upload users from a `.csv`, `.txt`, or `.xlsx` file (`/users/upload`)
 - **Log out** (`/logout`)
 
-Note: "accounts" (login credentials) are separate from "users" (the people being managed in the CRUD screens) -- two different tables, two different purposes.
+Note: "accounts" (login credentials, with a role) are separate from "users" (the people being managed in the CRUD screens) -- two different tables, two different purposes.
+
+### Bulk upload file format
+Only Admin accounts see the "Bulk Upload" button. The uploaded file must have a header row, then rows with exactly these 4 columns in order:
+```
+fullName, email, phoneNumber, address
+```
+Example:
+```
+fullName,email,phoneNumber,address
+Ravi Kumar,ravi.kumar@example.com,9998887777,Delhi India
+Sneha Rao,sneha.rao@example.com,9112233445,Bengaluru India
+```
 
 ## Project structure
 ```

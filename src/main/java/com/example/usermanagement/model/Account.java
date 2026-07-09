@@ -33,13 +33,18 @@ public class Account {
     @Column(nullable = false, length = 255)
     private String password;
 
+    // "ADMIN" or "USER" -- controls what this account is allowed to do
+    @Column(nullable = false, length = 20)
+    private String role = "USER"; // default value if nothing is set
+
     public Account() {
     }
 
-    public Account(String username, String email, String password) {
+    public Account(String username, String email, String password, String role) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public Long getId() {
@@ -72,5 +77,13 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

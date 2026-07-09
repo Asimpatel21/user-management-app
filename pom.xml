@@ -54,16 +54,27 @@
             <scope>runtime</scope>
         </dependency>
 
-      <!--
-     Gives us BCryptPasswordEncoder, used to HASH passwords before saving them.
-     We NEVER store a user's actual typed password in the database, only a scrambled
-     (one-way) version of it. This is the crypto piece of Spring Security, without
-     pulling in full Spring Security's login-page/session machinery; we're writing
-     our own simple login flow below so it's easier to follow.
-   -->
+        <!--
+          Gives us BCryptPasswordEncoder, used to HASH passwords before saving them.
+          We NEVER store a user's actual typed password in the database, only a scrambled
+          (one-way) version of it. This is the crypto piece of Spring Security, without
+          pulling in full Spring Security's login-page/session machinery; we're writing
+          our own simple login flow below so it's easier to follow.
+        -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
+        </dependency>
+
+        <!--
+          Apache POI: a library for reading/writing Microsoft Office files.
+          poi-ooxml specifically handles the modern .xlsx Excel format.
+          This is what lets our Java code open an uploaded Excel file and read its rows.
+        -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.5</version>
         </dependency>
 
         <!-- Auto-restarts the app when you change code, handy during development -->

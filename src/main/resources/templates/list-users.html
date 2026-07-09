@@ -11,8 +11,13 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>User Management</h2>
         <div>
-            <!-- ${session.loggedInUser} reads directly from the HttpSession we set at login -->
-            <span class="text-muted me-2">Logged in as <strong th:text="${session.loggedInUser}"></strong></span>
+            <!-- ${session.loggedInUser} / ${session.role} read directly from the HttpSession -->
+            <span class="text-muted me-2">
+                Logged in as <strong th:text="${session.loggedInUser}"></strong>
+                (<span th:text="${session.role}"></span>)
+            </span>
+            <!-- th:if only renders this button when the session's role is exactly ADMIN -->
+            <a th:if="${session.role == 'ADMIN'}" th:href="@{/users/upload}" class="btn btn-warning">Bulk Upload</a>
             <a th:href="@{/users/new}" class="btn btn-primary">+ Add User</a>
             <a th:href="@{/logout}" class="btn btn-outline-secondary">Logout</a>
         </div>

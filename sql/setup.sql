@@ -50,8 +50,17 @@ BEGIN
         username      NVARCHAR(50)  NOT NULL UNIQUE,
         email         NVARCHAR(150) NOT NULL UNIQUE,
         password      NVARCHAR(255) NOT NULL,   -- stores a HASHED password, never plain text
+        role          NVARCHAR(20)  NOT NULL DEFAULT 'USER',  -- 'ADMIN' or 'USER'
         created_at    DATETIME2 DEFAULT GETDATE()
     );
+END
+GO
+
+-- If you already ran this script before we added roles, this adds the column
+-- to your EXISTING accounts table without losing any data.
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('accounts') AND name = 'role')
+BEGIN
+    ALTER TABLE accounts ADD role NVARCHAR(20) NOT NULL DEFAULT 'USER';
 END
 GO
 

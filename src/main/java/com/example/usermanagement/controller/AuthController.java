@@ -58,6 +58,11 @@ public class AuthController {
             return "signup";
         }
 
+        // Only allow known roles -- ignore anything unexpected sent in the form
+        if (!"ADMIN".equals(account.getRole()) && !"USER".equals(account.getRole())) {
+            account.setRole("USER");
+        }
+
         // IMPORTANT: hash the password before saving -- never save the raw text
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         accountRepository.save(account);
@@ -87,8 +92,9 @@ public class AuthController {
             return "login";
         }
 
-        // Login successful: remember this user for future requests in this browser session
+        // Login successful: remember this user (and their role) for future requests in this browser session
         session.setAttribute("loggedInUser", accountOpt.get().getUsername());
+        session.setAttribute("role", accountOpt.get().getRole());
         return "redirect:/users";
     }
 
